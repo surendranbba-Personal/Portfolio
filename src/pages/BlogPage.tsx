@@ -13,6 +13,7 @@ import { profile, currentYear } from '../data/content';
 import { blogPosts, mediumProfile } from '../data/blog';
 import { Grain, MoodBackground } from '../components/atmosphere';
 import { CursorGlow } from '../components/CursorGlow';
+import { Footer } from '../components/Footer';
 import { Reveal, RevealHeading, WordReveal } from '../components/motion';
 import { Eyebrow } from '../components/cards';
 import { BlogCard, FeaturedBlogCard, MediumIcon } from '../components/blog';
@@ -62,9 +63,7 @@ export function BlogPage() {
       <nav className="fixed w-full z-50 glass-nav">
         <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-4">
           <button onClick={() => navigate('/')} className="group flex items-center gap-2.5">
-            <span className="grid h-9 w-9 place-items-center rounded-xl gradient-primary animate-gradient text-sm font-display font-bold text-white shadow-md ring-2 ring-white/50">
-              SM
-            </span>
+            <img src="/favicon.png" alt="Brand favicon" className="h-7 w-7 object-contain" />
             <span className="font-display text-xl font-bold tracking-tight text-slate-900 transition-colors group-hover:text-blue-600">
               {profile.name}
             </span>
@@ -181,32 +180,7 @@ export function BlogPage() {
         </Reveal>
       </section>
 
-      {/* ---------------- FOOTER ---------------- */}
-      <footer className="relative mt-10 overflow-hidden bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-slate-300">
-        <div className="absolute -top-px left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-cyan-400 to-fuchsia-500" />
-        <div className="relative mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 px-4 py-10 sm:flex-row">
-          <button onClick={() => navigate('/')} className="flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-xl gradient-primary animate-gradient text-white font-display font-bold shadow-lg ring-2 ring-white/20">
-              SM
-            </span>
-            <span className="text-left">
-              <span className="block font-display font-bold text-white">{profile.name}</span>
-              <span className="block text-xs text-slate-400">{profile.title}</span>
-            </span>
-          </button>
-
-          <div className="flex items-center gap-5 text-sm">
-            <a href={mediumProfile} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-slate-300 transition-colors hover:text-white">
-              <MediumIcon className="h-4 w-4" /> Medium
-            </a>
-            <button onClick={() => navigate('/')} className="text-slate-300 transition-colors hover:text-white">
-              Portfolio
-            </button>
-          </div>
-
-          <p className="text-xs text-slate-500">© {currentYear} {profile.name}.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

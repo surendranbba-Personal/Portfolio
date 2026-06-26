@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { ContactForm } from '../components/ContactForm';
+import { Footer } from '../components/Footer';
 import { navigate } from '../lib/router';
 
 export function PricingPage() {
@@ -21,10 +22,8 @@ export function PricingPage() {
 
       <nav className="fixed inset-x-0 top-0 z-50 glass-nav">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-          <button onClick={() => navigate('/')} className="group flex items-center gap-3 text-left">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl gradient-primary text-white font-display font-bold shadow-md ring-2 ring-white/50">
-              SM
-            </span>
+          <button onClick={() => navigate('/')} className="group flex items-center gap-2.5 text-left">
+            <img src="/favicon.png" alt="Brand favicon" className="h-7 w-7 object-contain" />
             <span className="font-display text-lg font-bold tracking-tight text-slate-900 transition-colors group-hover:text-blue-600">
               Surendran M
             </span>
@@ -501,6 +500,7 @@ export function PricingPage() {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

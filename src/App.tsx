@@ -27,6 +27,7 @@ import { StatementBand, BentoGrid, BeforeAfterSlider, ProjectsLineup, Faq } from
 import { Grain, MoodBackground } from './components/atmosphere';
 import { ResumeModal } from './components/ResumeModal';
 import { CursorGlow } from './components/CursorGlow';
+import { Footer } from './components/Footer';
 import { ContactForm } from './components/ContactForm';
 import { Eyebrow, TimelineCard, RichBlockCard } from './components/cards';
 import { BlogCard } from './components/blog';
@@ -168,9 +169,7 @@ function App() {
       <nav className={`fixed w-full z-50 glass-nav transition-shadow duration-300 ${scrolled ? 'shadow-[0_10px_30px_-12px_rgba(2,6,23,0.18)]' : ''}`}>
         <div className={`max-w-7xl mx-auto flex justify-between items-center gap-4 px-4 transition-all duration-300 ${scrolled ? 'py-2.5' : 'py-4'}`}>
           <button onClick={() => scrollTo(homeRef)} className="flex items-center gap-2.5 group shrink-0">
-            <span className={`rounded-xl gradient-primary animate-gradient grid place-items-center text-white font-display font-bold shadow-md ring-2 ring-white/50 transition-all duration-300 ${scrolled ? 'w-8 h-8 text-xs' : 'w-9 h-9 text-sm'}`}>
-              SM
-            </span>
+            <img src="/favicon.png" alt="Brand favicon" className="h-7 w-7 object-contain" />
             <span className="font-display font-bold text-xl tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors whitespace-nowrap">
               {profile.name}
             </span>
@@ -1037,93 +1036,7 @@ function App() {
         </div>
       </section>
 
-      {/* ---------------- FOOTER ---------------- */}
-      <footer className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-slate-300">
-        <div className="absolute -top-px left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-cyan-400 to-fuchsia-500" />
-        <div className="blob w-72 h-72 bg-indigo-600/30 -top-20 -left-10 float-slow" />
-        <div className="blob w-72 h-72 bg-fuchsia-600/20 -bottom-24 right-0 float" />
-
-        <div className="relative max-w-6xl mx-auto px-4 py-14">
-          <div className="grid md:grid-cols-3 gap-10">
-            {/* brand */}
-            <div className="md:col-span-1">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="w-11 h-11 rounded-xl gradient-primary animate-gradient grid place-items-center text-white font-display font-bold shadow-lg ring-2 ring-white/20">
-                  SM
-                </span>
-                <div>
-                  <p className="font-display font-bold text-white text-lg leading-tight">{profile.name}</p>
-                  <p className="text-xs text-slate-400">{profile.title}</p>
-                </div>
-              </div>
-              <p className="text-sm text-slate-400 max-w-xs">{profile.tagline} · Based in {profile.location}.</p>
-              <div className="flex items-center gap-3 mt-5">
-                {socialLinks.map(({ label, href, icon: Icon }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={label}
-                    className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 grid place-items-center transition-colors"
-                  >
-                    <Icon className="w-5 h-5" />
-                  </a>
-                ))}
-                <a href={`mailto:${profile.email}`} aria-label="Email"
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 grid place-items-center transition-colors">
-                  <Mail className="w-5 h-5" />
-                </a>
-                <button onClick={downloadResume} aria-label="Download resume"
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 grid place-items-center transition-colors">
-                  <Download className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
-            {/* quick links */}
-            <div>
-              <h4 className="text-white font-semibold mb-4">Explore</h4>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-2.5 text-sm">
-                {nav.map(([name, ref]) => (
-                  <button key={name} onClick={() => scrollTo(ref)} className="text-left text-slate-400 hover:text-white transition-colors">
-                    {name}
-                  </button>
-                ))}
-                <button onClick={() => navigate('/blog')} className="text-left text-slate-400 hover:text-white transition-colors">
-                  Blog
-                </button>
-                <button onClick={() => navigate('/pricing')} className="text-left text-slate-400 hover:text-white transition-colors">
-                  Pricing
-                </button>
-              </div>
-            </div>
-
-            {/* cta */}
-            <div>
-              <h4 className="text-white font-semibold mb-4">Let's connect</h4>
-              <p className="text-sm text-slate-400 mb-4">
-                Working full-time · available for freelance and project-based work.
-              </p>
-              <Magnetic>
-                <a href={`mailto:${profile.email}`} className="glass-btn !py-2.5 text-sm">
-                  <Mail className="w-4 h-4" /> Get in touch
-                </a>
-              </Magnetic>
-            </div>
-          </div>
-
-          <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-slate-500">© {currentYear} {profile.name}. All rights reserved.</p>
-            <button
-              onClick={() => scrollTo(homeRef)}
-              className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-white transition-colors"
-            >
-              Back to top <ArrowUp className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      </footer>
+      <Footer onBackToTop={() => scrollTo(homeRef)} />
     </div>
   );
 }
