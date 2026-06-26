@@ -1,0 +1,33 @@
+name: Refresh blog from Medium
+
+# Triggers a fresh Vercel production deploy on a schedule. Each deploy runs
+# `npm run build`, whose `prebuild` step (scripts/fetch-medium.mjs) pulls the
+# latest Medium articles into the site — so new posts appear automatically
+# with no code changes.
+#
+# SETUP (one time):
+#   1. Vercel → Project → Settings → Git → Deploy Hooks → create a hook
+#      (branch: main). Copy the URL.
+#   2. GitHub → repo → Settings → Secrets and variables → Actions →
+#      New repository secret named VERCEL_DEPLOY_HOOK_URL = that URL.
+#
+# You can also run it on demand from the Actions tab (Run workflow).
+
+on:
+  schedule:
+    - cron: '30 6 * * *' # daily at 06:30 UTC
+  workflow_dispatch: {}
+
+jobs:
+  trigger-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel deploy hook
+        run: |
+          if [ -z "${{ secrets.VERCEL_DEPLOY_HOOK_URL }}" ]; then
+            echo "::error::VERCEL_DEPLOY_HOOK_URL secret is not set. See the setup notes in this workflow file."
+            exit 1
+          fi
+          echo "Triggering Vercel production deploy…"
+          curl -fsSL -X POST "${{ secrets.VERCEL_DEPLOY_HOOK_URL }}"
+          echo "Done — Vercel will rebuild and re-sync the blog from Medium."
